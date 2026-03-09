@@ -1,0 +1,294 @@
+1. DOM (Document Object Model)
+Definition
+The DOM is a tree-like structure created by the browser when it loads HTML.
+
+Example HTML:
+
+<body>
+  <div>
+    <h1>Hello</h1>
+    <p>World</p>
+  </div>
+</body>
+
+Browser converts it into a tree structure:
+
+Body
+ └── Div
+      ├── H1 ("Hello")
+      └── P  ("World")
+
+JavaScript can manipulate it:
+
+document.querySelector("h1").textContent = "Hi"
+Problem with DOM
+
+Updating the DOM is slow because:
+
+Browser must recalculate layout
+
+Browser must repaint UI
+
+Every change can affect the entire page
+
+Example:
+
+for(let i=0;i<1000;i++){
+   document.body.appendChild(newDiv)
+}
+
+This causes 1000 DOM updates → expensive operation.
+
+2. Virtual DOM (VDOM)
+Definition
+
+The Virtual DOM is a lightweight JavaScript copy of the real DOM.
+
+Instead of updating the browser DOM directly, React updates a virtual representation first.
+
+Example VDOM object:
+
+{
+  type: "div",
+  props: {
+    children: [
+      { type: "h1", props: { children: "Hello" } }
+    ]
+  }
+}
+
+So React flow becomes:
+
+State Change
+     ↓
+Create New Virtual DOM
+     ↓
+Compare with Previous VDOM
+     ↓
+Update only changed parts in Real DOM
+Example
+
+Initial render
+
+<h1>Hello</h1>
+
+VDOM1
+
+h1
+ └── "Hello"
+
+After state change:
+
+<h1>Hello Roidon</h1>
+
+VDOM2
+
+h1
+ └── "Hello Roidon"
+
+React compares them and updates only text, not the entire DOM.
+
+Advantages of Virtual DOM
+
+1️⃣ Faster UI updates
+2️⃣ Less DOM manipulation
+3️⃣ Efficient rendering
+4️⃣ Improves performance
+
+Disadvantages
+
+1️⃣ Extra memory for VDOM
+2️⃣ Comparison algorithm cost
+3️⃣ Small apps may not benefit much
+
+3. Diffing Algorithm
+Definition
+
+Diffing is the process where React compares the old Virtual DOM with the new Virtual DOM.
+
+Goal:
+
+Find what exactly changed
+
+Example:
+
+Old VDOM
+
+<ul>
+  <li>A</li>
+  <li>B</li>
+</ul>
+
+New VDOM
+
+<ul>
+  <li>A</li>
+  <li>C</li>
+</ul>
+
+Diffing finds:
+
+B → C
+
+So React updates only that node.
+
+React Diffing Rules (important for interviews)
+
+React uses O(n) algorithm instead of O(n³).
+
+Two main assumptions:
+
+Rule 1
+
+Elements of different types produce different trees
+
+Example:
+
+<div> → <span>
+
+React will destroy old DOM and create new one.
+
+Rule 2
+
+Keys help React identify list items
+
+Example:
+
+{
+  items.map(item =>
+    <li key={item.id}>{item.name}</li>
+  )
+}
+
+Without keys React may re-render entire list.
+
+4. Reconciliation
+Definition
+
+Reconciliation is the process of updating the real DOM based on the diffing result.
+
+Flow:
+
+State change
+   ↓
+New Virtual DOM created
+   ↓
+Diffing compares old vs new VDOM
+   ↓
+Reconciliation updates real DOM
+
+Example:
+
+Old DOM:
+<h1>Hello</h1>
+
+New DOM:
+<h1>Hello Roidon</h1>
+
+Reconciliation will update only text node.
+
+5. React Fiber
+
+This is a very important interview topic.
+
+What is React Fiber?
+
+React Fiber is the new reconciliation engine introduced in React 16.
+
+Before Fiber, React used Stack Reconciliation.
+
+Problem:
+
+Rendering was synchronous
+React could not pause work
+
+This caused UI blocking.
+
+Example problem
+
+If React is rendering a large component tree:
+
+App
+ ├─ Navbar
+ ├─ Sidebar
+ ├─ Dashboard
+ │   ├─ Chart
+ │   ├─ Table
+ │   ├─ Graph
+
+React would block the main thread until everything finishes.
+
+User interactions freeze.
+
+What Fiber does
+
+Fiber breaks work into small units.
+
+Instead of:
+
+Do everything at once
+
+React Fiber does:
+
+Do small tasks
+Pause if needed
+Resume later
+
+Example:
+
+Render component
+Pause
+Handle user input
+Continue rendering
+Benefits of Fiber
+
+1️⃣ Interruptible rendering
+2️⃣ Better UI responsiveness
+3️⃣ Prioritization of updates
+4️⃣ Concurrent rendering support
+
+Fiber Structure
+
+Each component becomes a Fiber Node.
+
+Example:
+
+Fiber Node
+{
+  type: Component
+  stateNode: DOM
+  child: firstChild
+  sibling: nextChild
+  return: parent
+}
+
+This forms a linked list tree structure.
+
+Full React Rendering Flow (Interview Gold)
+State Change
+     ↓
+Create New Virtual DOM
+     ↓
+Diffing Algorithm
+     ↓
+Reconciliation
+     ↓
+React Fiber schedules work
+     ↓
+Update Real DOM
+Why React Introduced These Concepts
+Concept	Problem Solved
+DOM	Browser representation of UI
+Virtual DOM	Avoid expensive DOM operations
+Diffing	Efficient change detection
+Reconciliation	Efficient DOM updates
+React Fiber	Non-blocking rendering
+Simple Interview Answer (30 seconds)
+
+If interviewer asks:
+"Explain React rendering process."
+Answer:
+React uses a Virtual DOM to represent UI in memory. When state changes, React creates a new Virtual DOM and compares
+ it with the previous one using a diffing algorithm. This process is called reconciliation. React then updates only the
+  changed parts in the real DOM. In React 16, the Fiber architecture was introduced to break rendering work into small units,
+   allowing React to pause, resume, and prioritize updates for better performance.

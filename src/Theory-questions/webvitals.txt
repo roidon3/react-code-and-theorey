@@ -1,0 +1,101 @@
+Web Vitals are used to measure the performance and user experience of your web application.
+They come from web-vitals, which is a small library provided by Google.
+
+1. What Web Vitals Actually Measure
+Web Vitals measure how fast and smooth your website feels to the user.
+They track things like:
+How fast the page loads
+How quickly the user can interact
+Whether the page layout jumps while loading
+These metrics are also important for SEO ranking.
+
+2. Core Web Vitals Metrics
+1️⃣ LCP — Largest Contentful Paint
+Measures loading performance.
+It checks how long it takes for the biggest element on the page to appear.
+Example:
+Big image
+Large heading
+hero banner
+Good value:
+< 2.5 seconds
+
+2️⃣ FID — First Input Delay
+Measures interactivity.
+It checks how fast the browser responds when the user first interacts.
+Example:
+User clicks:
+button
+link
+input field
+If JavaScript is busy → delay occurs.
+Good value:
+< 100 ms
+
+3️⃣ CLS — Cumulative Layout Shift
+Measures visual stability.
+Example problem:
+Page loads like this:
+Login
+Password
+[Button]
+Then suddenly an ad loads and pushes everything down.
+That layout shift is bad UX.
+Good value:
+< 0.1
+
+3. Where Web Vitals Appear in React
+In a React app you usually see this file:
+src/reportWebVitals.js
+
+4. How It Is Used
+In index.js:
+import reportWebVitals from './reportWebVitals';
+reportWebVitals(console.log);
+Now performance metrics print in the console.
+CLS: 0.02
+FID: 20
+LCP: 1.8
+
+5. Why Companies Use Web Vitals
+Developers use them to:
+• monitor performance
+• improve loading speed
+• detect layout shifts
+• improve user experience
+• improve SEO
+Tools like:
+Google Lighthouse
+Google PageSpeed Insights
+Chrome DevTools
+also show these metrics.
+
+6. Real Example Problem
+Imagine your React page loads like this:
+Navbar
+Title
+Content
+Then a large image loads late and pushes everything down.
+CLS increases → bad Web Vital.
+Solution:
+Set width/height of images
+
+7. Extra Metrics (Non-core)
+Web Vitals library also measures:
+Metric	Meaning
+FCP	First Contentful Paint
+TTFB	Time To First Byte
+
+Simple Summary
+Web Vitals = performance metrics that measure how fast and stable your React website is for users.
+Main ones:
+LCP → Loading speed
+FID → Interaction speed
+CLS → Layout stability
+
+“Why does React render components twice in development?”
+You can answer:
+
+In development mode, React StrictMode intentionally renders components twice to detect side effects and ensure components
+ handle cleanup properly. This helps identify bugs such as improper subscriptions, timers, or API calls. This behavior only
+ happens in development and not in production.
