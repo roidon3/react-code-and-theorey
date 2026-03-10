@@ -1,0 +1,254 @@
+React applications are often called SPA (Single Page Applications) because the entire app runs inside a single HTML page
+ and updates the UI dynamically without reloading the page
+
+1️⃣ What is an SPA (Single Page Application)?
+A Single Page Application (SPA) is a web application that:
+Loads one HTML page initially
+After that, JavaScript dynamically updates the UI
+No full page reload happens
+Traditional websites load a new HTML page for every request, but SPAs change content inside the same page.
+
+2️⃣ Traditional Multi-Page Application (MPA)
+Example: Old websites using PHP / JSP / ASP.NET.
+Flow
+User clicks link
+     ↓
+Browser sends request to server
+     ↓
+Server generates NEW HTML page
+     ↓
+Browser reloads entire page
+
+Example:
+example.com/home
+example.com/about
+example.com/contact
+
+Problems
+
+❌ Full page reload
+❌ Slow user experience
+❌ State resets every time
+❌ More server work
+
+3️⃣ React Application Flow (SPA)
+In React, only one HTML file loads.
+Usually:
+index.html
+Example:
+<div id="root"></div>
+React mounts the app inside this root div.
+
+Flow
+User opens website
+      ↓
+index.html loads
+      ↓
+React JS bundle loads
+      ↓
+React renders UI inside <div id="root">
+      ↓
+Navigation happens using JavaScript
+      ↓
+Only components update
+
+No full page reload.
+
+******************************************************************
+
+1️⃣ User Types URL in Browser
+Example:
+https://myreactapp.com
+Browser sends an HTTP request to the server.
+
+Browser  ───── request ─────►  Server
+
+Request:
+
+GET /
+
+2️⃣ Server Sends index.html
+The server does NOT send the entire React app.
+It only sends a simple HTML file.
+Example:
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My React App</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="/static/js/main.js"></script>
+
+</body>
+</html>
+
+Important:
+
+<div id="root"></div>
+This is where React will render the app.
+So response flow:
+Server ───── index.html ─────► Browser
+
+3️⃣ Browser Parses HTML
+Browser reads the HTML and builds the DOM.
+DOM currently looks like:
+body
+ └── div#root
+
+Nothing inside yet.
+
+4️⃣ Browser Sees Script Tag
+Inside HTML:
+<script src="/static/js/main.js"></script>
+Browser now sends another request.
+GET /static/js/main.js
+
+5️⃣ Server Sends React Bundle
+The server sends the JavaScript bundle.
+Example:
+main.js
+vendors.js
+runtime.js
+These bundles were created by bundlers like:
+Webpack
+Vite
+Bundle contains:
+React
+ReactDOM
+Your components
+All JS files
+Dependencies
+
+6️⃣ Browser Executes Bundle
+Now browser runs:
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+Now React starts.
+
+7️⃣ React Creates Virtual DOM
+React builds a Virtual DOM tree.
+Example:
+
+<App>
+ ├── Navbar
+ ├── Sidebar
+ └── Home
+
+This is not real DOM yet.
+
+It is JavaScript objects.
+
+Example simplified:
+
+{
+ type: "div",
+ children: [...]
+}
+
+8️⃣ React Converts Virtual DOM → Real DOM
+React now updates the DOM.
+DOM becomes:
+
+body
+ └── div#root
+      ├── Navbar
+      ├── Sidebar
+      └── Home
+
+Now UI appears.
+User sees the page.
+
+9️⃣ React Fetches Data from APIs
+React components usually call APIs.
+Example:
+useEffect(() => {
+  fetch("/api/users")
+}, [])
+
+Browser sends request:
+GET /api/users
+Server returns:
+[
+ { "name": "John" },
+ { "name": "Alice" }
+]
+
+🔟 User Clicks Navigation
+User clicks:
+About
+Example link:
+<Link to="/about">About</Link>
+Handled by:
+React Router
+Important:
+Browser does not reload page.
+Instead:
+React Router intercepts click
+
+1️⃣1️⃣ React Changes Component
+Old UI:
+<Home />
+New UI:
+<About />
+React compares:
+Old Virtual DOM
+vs
+New Virtual DOM
+
+This process is called Reconciliation.
+
+React updates only the changed part.
+
+1️⃣2️⃣ DOM Updates
+Instead of refreshing the page:
+Only changed nodes update
+Example:
+
+Content section changes
+Navbar stays same
+Sidebar stays same
+
+Complete React Flow Diagram
+
+User enters URL
+       │
+       ▼
+Browser sends request
+       │
+       ▼
+Server sends index.html
+       │
+       ▼
+Browser loads HTML
+       │
+       ▼
+Browser requests JS bundle
+       │
+       ▼
+Server sends bundle.js
+       │
+       ▼
+Browser executes React code
+       │
+       ▼
+React builds Virtual DOM
+       │
+       ▼
+React renders UI inside #root
+       │
+       ▼
+Components call APIs
+       │
+       ▼
+Server returns JSON
+       │
+       ▼
+React updates UI
+       │
+       ▼
+User navigation handled by React Router
+       │
+       ▼
+Only components update (no page reload)
+
