@@ -1,0 +1,1 @@
+this invovles auth 0 next auth clerk etc
