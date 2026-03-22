@@ -1,0 +1,54 @@
+In JavaScript, “stack overflow” usually refers to an error that happens when the call stack gets too big.
+
+🔹 First, what is the call stack?
+The call stack is where JavaScript keeps track of function calls.
+Example:
+function a() {
+  b();
+}
+
+function b() {
+  console.log("Hello");
+}
+
+a();
+Flow:
+
+a() goes into stack
+b() goes into stack
+console.log() goes into stack
+Then everything pops out one by one
+👉 Stack works LIFO (Last In First Out)
+
+What is Stack Overflow?
+A stack overflow happens when too many function calls are added to the stack and it runs out of space.
+
+💥 Most common reason: Infinite recursion
+function foo() {
+  foo(); // calling itself again and again
+}
+
+foo();
+This keeps pushing foo() into the stack →
+💥 Eventually you get:
+
+RangeError: Maximum call stack size exceeded
+
+🔍 Another example (missing base condition)
+
+function count(n) {
+  console.log(n);
+  count(n + 1); // no stopping condition
+}
+
+count(1);
+Again → infinite calls → stack overflow
+
+✅ Correct version (with base case)
+function count(n) {
+  if (n > 5) return; // base condition
+  console.log(n);
+  count(n + 1);
+}
+
+count(1);

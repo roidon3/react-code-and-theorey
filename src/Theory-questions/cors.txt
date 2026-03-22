@@ -1,0 +1,109 @@
+🔐 What is CORS?
+✅ Definition (say this in interview)
+CORS (Cross-Origin Resource Sharing) is a browser security mechanism that controls how resources (APIs) 
+from one origin can be requested by another origin.
+🧠 What is an “Origin”?
+An origin = 👉 protocol + domain + port
+Example:
+http://example.com
+https://example.com
+https://example.com:3000
+
+All are different origins
+🚫 Default Rule (Same-Origin Policy)
+Browsers follow something called:
+👉 Same-Origin Policy (SOP)
+
+Meaning:
+A frontend can only call APIs from the same origin by default.
+
+🌐 Why CORS exists?
+To relax Same-Origin Policy safely
+👉 It allows servers to say:
+“Okay, I trust this other origin — allow it”
+
+⚙️ How CORS works (VERY IMPORTANT 🔥)
+Example:
+Frontend:
+http://localhost:3000
+Backend:
+http://api.example.com
+👉 This is cross-origin
+
+Step 1: Browser sends request
+GET /data
+Origin: http://localhost:3000
+
+Step 2: Server responds with headers
+Access-Control-Allow-Origin: http://localhost:3000
+
+Step 3:
+If header is present → ✅ request allowed
+If missing → ❌ blocked by browser
+
+📌 Important CORS Headers (Interview gold ⭐)
+Header	Purpose
+Access-Control-Allow-Origin	        Which origin is allowed
+Access-Control-Allow-Methods	    GET, POST, PUT, DELETE
+Access-Control-Allow-Headers	    Custom headers
+Access-Control-Allow-Credentials	Allow cookies/auth
+
+What is a CORS Error?
+✅ Definition (interview-ready)
+A CORS error occurs when the browser blocks a cross-origin request because the server did not allow it via CORS headers.
+
+Access to fetch at 'http://api.example.com'
+from origin 'http://localhost:3000'
+has been blocked by CORS policy
+
+⚠️ IMPORTANT POINT (very important for interviews)
+👉 CORS error is NOT a backend error
+👉 It is a browser-enforced security restriction
+
+🔍 Types of CORS Requests
+1️⃣ Simple Request
+GET / POST
+No custom headers
+👉 Direct request sent
+
+2️⃣ Preflight Request (🔥 very important)
+
+Before actual request, browser sends:
+
+OPTIONS /data
+
+This checks:
+
+Allowed methods?
+Allowed headers?
+
+Then server responds:
+Access-Control-Allow-Methods: GET, POST
+
+👉 If allowed → actual request is sent
+
+
+
+🌐 HTTP vs HTTPS
+✅ Definition (Interview-ready)
+HTTP (HyperText Transfer Protocol)
+👉 A protocol used to transfer data between client (browser) and server.
+HTTPS (HyperText Transfer Protocol Secure)
+👉 HTTP + security (encryption using SSL/TLS)
+
+🔑 Core Difference
+👉 HTTP = No security
+👉 HTTPS = Secure (encrypted communication)
+🔐 What actually happens in HTTPS? (Important 🔥)
+
+HTTPS uses TLS (Transport Layer Security) (earlier SSL)
+Flow:
+Browser connects to server
+Server sends SSL certificate
+Browser verifies it
+Encryption keys are generated
+Data is sent encrypted
+
+
+
+//csp headers
