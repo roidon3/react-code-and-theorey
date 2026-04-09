@@ -1,0 +1,123 @@
+import React, { useEffect, useState } from "react";
+//normal setstste
+//dynamic setstste
+//check box
+//radio button
+//todod
+//stopwatch
+function Hooksprac() {
+
+  //case1 indivual
+  // const [name, setName] = useState("");
+  // const [country, setCountry] = useState("");
+
+  //case2 array of obj
+  // const [formData, setFormData] = useState({ name: "", country: ""});
+
+  // case3 dyanic handlechange
+  // const [formData, setFormData] = useState({ name: "", country: ""});
+  // function handlechange(e){
+  //   setFormData({ ...formData,[e.target.name]:e.target.value})
+  // }
+  // console.log(formData);
+
+
+  //case4 checkBox
+  // const [isChecked, setIsChecked] = useState(true);
+
+  //case5 multiple ckek box
+//   const [checkboxes, setCheckboxes] = useState({
+//     first: true,   // Checked by default
+//     second: false, // Unchecked by default
+//     third: true    // Checked by default
+// });
+// const handleChange = (e) => {
+//   setCheckboxes({
+//       ...checkboxes,
+//       [e.target.name]: e.target.checked
+//   });
+// };
+
+//case6 radio button 
+const [selectedOption, setSelectedOption] = useState("option1"); // Default selection
+
+  return (
+    <>
+    {/* case1 */}
+      {/* <input type="text" name="name" value={name} onChange={(e)=> setName(e.target.value)} />
+      <input type="text" name="country" value={country}  onChange={(e)=> setCountry(e.target.value)} /> */}
+
+{/* case2 */}
+{/* <input type="text" name="name" value={formData.name}  onChange={(e) => setFormData({ ...formData,[e.target.name]: e.target.value}) } />
+<input type="text" name="country" value={formData.country}  onChange={(e) => setFormData({ ...formData,[e.target.name]: e.target.value}) } /> */}
+
+{/* case3 */}
+{/* <input type="text" name="name" value={formData.name}  onChange={handlechange } required={true}/>
+<input type="text" name="country" value={formData.country}  onChange={handlechange } /> */}
+
+{/* case4 */}
+              {/* <label> <input type="checkbox" checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)} />Check me</label>
+            <p>{isChecked.toString()}</p> */}
+
+            {/* case5 */}
+
+            {/* <label> <input type="checkbox" name="first" checked={checkboxes.first} onChange={handleChange}  />First Checkbox</label>
+            <br />
+
+            <label><input type="checkbox" name="second"  checked={checkboxes.second}  onChange={handleChange} />Second Checkbox</label>
+            <br />
+
+            <label> <input type="checkbox" name="third"  checked={checkboxes.third}  onChange={handleChange}  />  Third Checkbox</label>
+            <br />
+
+            <p>First: {checkboxes.first.toString()}</p>
+            <p>Second: {checkboxes.second.toString()}</p>
+            <p>Third: {checkboxes.third.toString()}</p> */}
+
+
+            {/* case6 */}
+
+            <label>
+                <input 
+                    type="radio" 
+                    name="options" 
+                    value="option1" 
+                    checked={selectedOption === "option1"} 
+                    onChange={(e) => setSelectedOption(e.target.value)} 
+                />
+                Option 1
+            </label>
+            <br />
+
+            <label>
+                <input 
+                    type="radio" 
+                    name="options" 
+                    value="option2" 
+                    checked={selectedOption === "option2"} 
+                    onChange={(e) => setSelectedOption(e.target.value)} 
+                />
+                Option 2
+            </label>
+            <br />
+
+            <label>
+                <input 
+                    type="radio" 
+                    name="options" 
+                    value="option3" 
+                    checked={selectedOption === "option3"} 
+                    onChange={(e) => setSelectedOption(e.target.value)} 
+                />
+                Option 3
+            </label>
+            <br />
+
+            <p>Selected Option: {selectedOption}</p>
+
+
+    </>
+  );
+}
+
+export default Hooksprac;
