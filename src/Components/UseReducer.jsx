@@ -15,7 +15,6 @@
 //dispatch function is used to send actions to reducer,which updates the state based on action type
 //reducer function takes current state and action as argument and return new state
 
-import { type } from "@testing-library/user-event/dist/type";
 import React, { useReducer } from "react";
 
 function UseReducer() {
