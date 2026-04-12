@@ -9,10 +9,10 @@ import UseMemo from './Components/UseMemo';
 import UseCallback from './Components/UseCallback';
 import CustomHooks from './Components/CustomHooks';
 import CustomHooks1 from './Components/CustomHooks1';
-import InfiniteScroll from './Components/InfiniteScroll';
 import Todo from './Components/CodingQ/Todo';
 import WissenQ from './Components/CodingQ/WissenQ';
 import StopWatch from './Components/CodingQ/StopWatch';
+import InfinteScroll from './Components/CodingQ/InfinteScroll';
 function App() {
   return (
     <Routes>
@@ -27,13 +27,10 @@ function App() {
       <Route path="/customHooks" element={<CustomHooks />} />
       <Route path="/customHooks1" element={<CustomHooks1 />} />
       <Route path="/apiCall" element={<ApiCalls />} />
-      <Route path="/infiniteScroll" element={<InfiniteScroll />} />
       <Route path="/todo" element={<Todo />} />
       <Route path='/wissen' element={<WissenQ />} />
       <Route path='/stopwatch' element={<StopWatch />} />
-      <Route path='/infinite' element={<InfiniteScroll />} />
-
-
+      <Route path='/infinite' element={<InfinteScroll />} />
     </Routes>
 
   );
