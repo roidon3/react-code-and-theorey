@@ -1,0 +1,333 @@
+//1. I dont want to run a function on first run ,run second time onwards
+🔥 Use useRef to track first render
+
+import { useEffect, useRef } from "react";
+
+function MyComponent() {
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; // ❌ skip first time
+    }
+
+    // ✅ runs from second time onwards
+    console.log("Function runs after first render");
+  });
+}
+I use a useRef flag to track the first render and skip execution initially, 
+so the function runs only from the second render onwards.
+
+
+//CSR vs SSR vs ISR
+
+1. CSR (Client-Side Rendering)
+CSR means the browser (client) is responsible for rendering the UI using JavaScript.
+Flow
+Browser loads a minimal HTML file
+JS bundle is downloaded
+React/Vue renders content in browser
+CSR (Client-Side Rendering) is a way of rendering web pages where most of the work happens
+ in the browser (client) instead of the server.
+
+CSR means:
+👉 The server sends a minimal HTML file + JavaScript
+👉 The browser builds the UI using JavaScript (like React)
+eg: React Angular Vue.js
+
+🔹 How CSR Works (Step-by-Step)
+
+The browser requests a webpage from the server
+The server sends a basic HTML file (often mostly empty) + JavaScript
+The browser runs the JavaScript
+JavaScript fetches data (via APIs)
+The page content is dynamically built and displayed
+
+
+<div id="root"></div>
+<script src="bundle.js"></script>
+
+Advantages of CSR
+
+1. Faster interactions after load
+No need to reload the whole page
+Smooth navigation (like apps)
+2. Better user experience
+Dynamic updates (e.g., live search, chat apps)
+3. Less server load (after initial load)
+Browser handles most rendering
+
+Disadvantages of CSR
+
+1. Slower initial load
+Browser must download and execute JavaScript first
+2. SEO challenges
+Search engines may struggle to index content (though modern engines are improving)
+3. Depends heavily on JavaScript
+If JS fails or is disabled → page may not work properly
+
+
+SSR
+Server-Side Rendering (SSR) is a web development technique where the server generates the full HTML page
+and sends it to the browser already ready to display.
+
+How SSR works
+
+Browser requests a webpage
+Server processes the request
+Server fetches data (e.g., from a database/API)
+Server builds the complete HTML page
+Browser receives and displays it immediately
+
+Simple flow
+
+👉 Browser → request
+👉 Server → builds full page
+👉 Browser → shows ready-made content
+
+Advantages of SSR
+
+1. Faster initial page load
+User sees content immediately
+2. Better SEO
+Search engines can easily read fully rendered HTML
+3. Works without heavy JavaScript 
+Basic content loads even if JS is slow or disabled
+
+Disadvantages of SSR
+1. Slower interactions after load
+Page reloads often needed for updates
+2. Higher server load
+Server renders pages for every request
+3. More complex backend
+Requires handling rendering logic on server
+
+ISR 
+
+ISR (Incremental Static Regeneration) is a modern rendering technique that combines the 
+best parts of static generation (SSG) and server-side rendering (SSR).
+
+It’s most commonly used in frameworks like Next.js.
+
+What ISR means
+
+ISR allows you to:
+👉 Generate static pages (fast like SSG)
+👉 Update them later automatically without rebuilding the whole site
+
+How ISR works
+Page is generated as a static HTML file (at build time or first request)
+Users get this fast, cached page
+After a set time (called revalidation time),
+A new request triggers regeneration in the background
+The page updates without downtime
+
+Advantages of ISR
+1. Very fast performance
+Pages are served as static files
+2. No full rebuild needed
+Only updated pages are regenerated
+3. Good SEO
+Like SSR, content is pre-rendered
+4. Scalable
+Works well for large sites (e.g., thousands of pages)
+
+Disadvantages of ISR
+1. Slightly stale data
+Users may see old content until regeneration happens
+2. More complexity
+
+Need to manage revalidation timing
+
+SSG
+SSG (Static Site Generation) is a rendering method where HTML pages are generated at build time 
+(before users request them) and then served as static files.
+
+What SSG means
+
+👉 Pages are pre-built once
+👉 Stored as static files (HTML, CSS, JS)
+👉 Served instantly to users
+
+How SSG works
+You build your project (npm run build)
+The framework fetches data (APIs, database)
+It generates full HTML pages
+These pages are stored on a server/CDN
+When a user visits → they get the ready page instantly
+
+Advantages of SSG
+1. Super fast performance
+Pages are already built → no processing needed
+2. Great SEO
+Fully rendered HTML is available
+3. Very scalable
+Can be served via CDN with minimal server load
+4. High reliability
+No server logic needed at runtime
+
+Disadvantages of SSG
+1. Not real-time
+Content doesn’t update unless you rebuild
+2. Build time can be long
+Large sites = slower builds
+3. Not ideal for frequently changing data
+
+Example: live stock prices, dashboards
+
+
+//next-head
+//css custom properties
+CSS Custom Properties (often called CSS variables) are variables you define in CSS and reuse throughout your styles.
+
+Instead of repeating values like this:
+button {
+  background-color: blue;
+}
+.card {
+  border-color: blue;
+}
+
+You define a variable once:
+:root {
+  --primary-color: blue;
+}
+And reuse it
+button {
+  background-color: var(--primary-color);
+}
+
+.card {
+  border-color: var(--primary-color);
+}
+
+//diff bw json and array of obj
+
+//what will happen if useeffect hook runs continuesly 
+
+If a useEffect hook runs continuously, it usually means you’ve created an infinite render loop—and that’s a problem.
+What actually happens
+
+When useEffect keeps running again and again:
+
+👉 Component re-renders repeatedly
+👉 CPU usage spikes
+👉 App becomes slow or freezes
+👉 You may see errors like:
+
+
+//Context APIs
+🔹 What is Context API?
+Context API is a way to share data across components without passing props manually at every level (prop drilling).
+
+//step :1  Create Context
+import { createContext } from "react";
+export const MyContext = createContext();
+
+//step :2 Provide Context
+<MyContext.Provider value={{ name: "Roidon" }}>
+  <App />
+</MyContext.Provider>
+
+//step :3 Consume Context
+import { useContext } from "react";
+import { MyContext } from "./context";
+
+function Child() {
+  const data = useContext(MyContext);
+  return <h1>{data.name}</h1>;
+}
+
+//redux tool kit
+Redux Toolkit is the official, recommended way to write Redux logic.
+
+🤯 Problem with plain Redux (why RTK exists)
+Old Redux required:
+action types
+action creators
+reducers
+switch cases
+lots of files
+
+Core concepts in Redux Toolkit
+
+1. configureStore()
+Creates the Redux store (simpler than createStore)
+
+import { configureStore } from "@reduxjs/toolkit";
+
+const store = configureStore({
+  reducer: counterReducer
+});
+
+2. createSlice() ⭐ (most important)
+This replaces: actions , reducers
+
+It automatically generates:  action creators , action types , reducer
+
+const slice = createSlice({
+  name: "example",
+  initialState: {},
+  reducers: {
+    add: (state, action) => {
+      state.value = action.payload;
+    }
+  }
+});
+
+3. Direct state mutation? 🤨
+You might notice:
+state.value = 10;
+👉 This looks like mutation, but it’s NOT.
+RTK uses **Immer internally.
+So:
+you write mutation
+it safely creates immutable updates behind the scenes
+
+4. createAsyncThunk() (for API calls) - Used for async operations like fetching data:
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+export const fetchData = createAsyncThunk(
+  "data/fetch",
+  async () => {
+    const response = await fetch("API_URL");
+    return response.json();
+  }
+);
+
+access data
+
+import { useSelector } from "react-redux";
+
+const Counter = () => {
+  const count = useSelector((state) => state.counter.value);
+
+  return <h1>{count}</h1>;
+};
+
+How it works:
+state = entire Redux store
+state.counter = slice name
+state.counter.value = actual data
+👉 You are reading data from store
+
+📤 2. Send data → useDispatch()
+import { useDispatch } from "react-redux";
+import { increment, addByAmount } from "./counterSlice";
+
+const Counter = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      <button onClick={() => dispatch(increment())}>
+        Increment
+      </button>
+
+      <button onClick={() => dispatch(addByAmount(5))}>
+        Add 5
+      </button>
+    </>
+  );
+};

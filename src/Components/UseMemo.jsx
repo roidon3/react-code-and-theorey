@@ -49,3 +49,30 @@ function UseMemo() {
 }
 
 export default UseMemo;
+
+
+// import React, { useState, useMemo } from "react";
+
+// function UseMemo() {
+//   const [count, setCount] = useState(0);
+//   const [num, setNum] = useState(5);
+
+//   const square = useMemo(() => {
+//     console.log("Calculating...");
+//     return num * num;
+//   }, [num]);
+
+//   return (
+//     <div>
+//       <h2>Square: {square}</h2>
+
+//       <button onClick={() => setCount(count + 1)}>
+//         Re-render ({count})
+//       </button>
+
+//       <button onClick={() => setNum(num + 1)}>
+//         Change Number
+//       </button>
+//     </div>
+//   );
+// }

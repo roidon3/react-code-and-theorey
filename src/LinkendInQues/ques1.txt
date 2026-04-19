@@ -1,1 +1,123 @@
-//1.diff bw js and .jsx file
+1.diff bw js and .jsx file
+
+2.does browser understand ts and jsx
+
+No — browsers do NOT understand JSX directly.
+JSX is not valid JavaScript. It’s a special syntax used in libraries like React.
+Before the code reaches the browser, JSX is converted into normal JavaScript.
+This process is called transpiling.
+
+No — browsers do NOT understand TypeScript (TS) directly.
+Before running in the browser, TypeScript is converted into plain JavaScript.
+This process is called compilation (or transpilation).
+
+3.diff bw forEach and map
+
+Map:
+Used when you want to transform data
+Always returns a new array
+✔ Creates a new array
+✔ Does not modify original array
+
+const numbers = [1, 2, 3];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6]
+chainable
+
+ForEach:
+Used for side effects (like logging, updating variables)
+Returns undefined
+✔ Executes function for each item
+❌ Does NOT return a new array
+
+const numbers = [1, 2, 3];
+
+numbers.forEach(num => {
+  console.log(num * 2);
+});
+cannot chain
+
+4.If we cannot change the value of const how we are changing in const arr=[];
+
+const does NOT mean the value is immutable
+It means the variable reference cannot be reassigned
+
+const arr = [1, 2, 3, 4, 5];
+👉 arr always points to the same array
+❌ You cannot do this:
+arr = [10, 20]; // ❌ Error
+
+But you CAN modify the array
+Because arrays are mutable objects, you can change their contents:
+✅ Add elements
+arr.push(6);
+✅ Remove elements
+arr.pop();
+
+Simple analogy
+const arr = A fixed box 📦
+Inside items can be changed 🧩
+But you can’t replace the box itself
+
+If you want true immutability
+You can use:
+1. Object.freeze()
+
+6.weak map vs weak set
+
+WeakMap and WeakSet are special versions of Map and Set in JavaScript that deal with memory management and object references.
+They store weak references to objects
+If the object is no longer used elsewhere → it gets garbage collected automatically
+
+🔹 WeakMap
+A WeakMap is like a Map, but:
+Keys must be objects only
+Keys are held weakly (no memory leaks)
+let user = { name: "Alice" };
+
+const weakMap = new WeakMap();
+weakMap.set(user, "User data");
+console.log(weakMap.get(user)); // "User data"
+user = null; // remove reference
+
+Key features of WeakMap
+Keys must be objects
+Not iterable (no loops like forEach)
+No .size property
+Used for private data / memory-safe storage
+
+🔹 WeakSet
+
+A WeakSet is like a Set, but:
+Stores only objects (no primitives)
+Objects are held weakly
+let obj = { id: 1 };
+
+const weakSet = new WeakSet();
+weakSet.add(obj);
+console.log(weakSet.has(obj)); // true
+obj = null;
+👉 Object gets garbage collected
+👉 It disappears from the WeakSet
+
+Key features of WeakSet
+Only objects allowed
+Not iterable
+No .size
+Automatically cleans up unused objects
+
+7.explain typescript
+8.call by value vs call by reference
+9.garbage collection
+10.es6 features
+11.websoket polling
+12.react 19 features
+//jest testing
+//hof next js
+//authination ,token
+//strict non strcit mode
+//micro frontend module fixed
+//shadow dom
+//event emitter
+// What is the purpose of Symbol in JavaScript? How is it used?
+//Explain how memory is managed in JavaScript. What are garbage collection and memory leaks?
