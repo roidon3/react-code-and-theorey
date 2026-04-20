@@ -33,8 +33,8 @@ function App() {
       <Route path='/wissen' element={<WissenQ />} />
       <Route path='/stopwatch' element={<StopWatch />} />
       <Route path='/infinite' element={<InfinteScroll />} />
-         <Route path='/debounce' element={<Debounce />} />
-           <Route path='/throttle' element={<Throttle />} />
+      <Route path='/debounce' element={<Debounce />} />
+      <Route path='/throttle' element={<Throttle />} />
     </Routes>
 
   );
