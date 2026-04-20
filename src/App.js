@@ -13,6 +13,8 @@ import Todo from './Components/CodingQ/Todo';
 import WissenQ from './Components/CodingQ/WissenQ';
 import StopWatch from './Components/CodingQ/StopWatch';
 import InfinteScroll from './Components/CodingQ/InfinteScroll';
+import Debounce from './Components/CodingQ/Debounce';
+import Throttle from './Components/CodingQ/Throttle';
 function App() {
   return (
     <Routes>
@@ -31,6 +33,8 @@ function App() {
       <Route path='/wissen' element={<WissenQ />} />
       <Route path='/stopwatch' element={<StopWatch />} />
       <Route path='/infinite' element={<InfinteScroll />} />
+         <Route path='/debounce' element={<Debounce />} />
+           <Route path='/throttle' element={<Throttle />} />
     </Routes>
 
   );

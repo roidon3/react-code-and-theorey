@@ -1,7 +1,6 @@
 1.diff bw js and .jsx file
 
 2.does browser understand ts and jsx
-
 No — browsers do NOT understand JSX directly.
 JSX is not valid JavaScript. It’s a special syntax used in libraries like React.
 Before the code reaches the browser, JSX is converted into normal JavaScript.
@@ -12,7 +11,6 @@ Before running in the browser, TypeScript is converted into plain JavaScript.
 This process is called compilation (or transpilation).
 
 3.diff bw forEach and map
-
 Map:
 Used when you want to transform data
 Always returns a new array
@@ -38,7 +36,6 @@ numbers.forEach(num => {
 cannot chain
 
 4.If we cannot change the value of const how we are changing in const arr=[];
-
 const does NOT mean the value is immutable
 It means the variable reference cannot be reassigned
 
@@ -63,8 +60,7 @@ If you want true immutability
 You can use:
 1. Object.freeze()
 
-6.weak map vs weak set
-
+5.weak map vs weak set
 WeakMap and WeakSet are special versions of Map and Set in JavaScript that deal with memory management and object references.
 They store weak references to objects
 If the object is no longer used elsewhere → it gets garbage collected automatically
@@ -106,18 +102,200 @@ Not iterable
 No .size
 Automatically cleans up unused objects
 
-7.explain typescript
-8.call by value vs call by reference
-9.garbage collection
-10.es6 features
-11.websoket polling
-12.react 19 features
-//jest testing
-//hof next js
-//authination ,token
-//strict non strcit mode
-//micro frontend module fixed
-//shadow dom
-//event emitter
-// What is the purpose of Symbol in JavaScript? How is it used?
-//Explain how memory is managed in JavaScript. What are garbage collection and memory leaks?
+6.explain typescript
+TypeScript is a programming language developed by Microsoft that builds on JavaScript by adding types.
+ It’s designed to help you write safer, more structured code—especially for large applications.
+
+🔑 Key features
+1. Static typing
+You can define what kind of data a variable should hold.
+let age: number = 25;
+let name: string = "Alex";
+If you try something wrong:
+age = "twenty-five"; // ❌ Error
+TypeScript catches mistakes before running the code.
+
+2. Type inference
+You don’t always need to write types—TypeScript can guess them:
+let score = 100; // inferred as number
+
+3. Interfaces & types
+You can define shapes of objects:
+interface User {
+  name: string;
+  age: number;
+}
+const user: User = {
+  name: "Sam",
+  age: 30
+};
+
+🆚 interface vs type in TypeScript
+Both are used to define the shape of data, but they behave differently in some cases.
+
+1.basic use
+interface User {
+  name: string;
+  age: number;
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+🔄 2. Extending / merging
+✅ Interface supports declaration merging
+interface User {
+  name: string;
+}
+interface User {
+  age: number;
+}
+// merged automatically
+const user: User = { name: "Sam", age: 25 };
+
+❌ Type does NOT merge
+type User = { name: string };
+type User = { age: number }; // ❌ Error
+
+🧬 3. Extending
+Interface (clean syntax)
+interface Person {
+  name: string;
+}
+
+interface Employee extends Person {
+  salary: number;
+}
+Type (uses intersections &)
+type Person = { name: string };
+
+type Employee = Person & {
+  salary: number;
+};
+
+🧠 4. Flexibility
+type is more powerful
+It can represent:
+Unions
+Tuples
+Primitive aliases
+type ID = string | number;
+type Point = [number, number];
+👉 Interfaces cannot do this.
+
+
+🏗️ 5. Use cases (rule of thumb)
+
+Use interface when:
+Defining object shapes
+Working with classes
+You want extensibility / merging
+
+Use type when:
+You need unions (A | B)
+You need complex compositions
+You want aliases for primitives or tuples
+
+7.es6 features
+🚀 1. let and const
+Block-scoped variables (better than var).
+
+➡️ 2. Arrow functions
+Shorter function syntax + lexical this.
+
+🧱 3. Classes
+Cleaner way to write object-oriented code.
+
+📦 4. Modules (import/export)
+Split code into reusable files.
+// export
+export const name = "Sam";
+// import
+import { name } from "./file.js";
+
+🧩 5. Template literals4
+
+📥 6. Default parameters
+function greet(name = "Guest") {
+  return `Hello ${name}`;
+}
+
+🧺 7. Destructuring
+
+🔁 8. Spread & Rest operators (...)
+
+🗺️ 9. Map & Set
+🔍 9. Promises
+
+8.strict non strcit mode
+
+In JavaScript, strict mode and non-strict mode (sloppy mode) control how the code is interpreted and how errors are handled.
+
+🧠 What is Strict Mode?
+Strict mode is a way to enforce cleaner, safer JavaScript by enabling stricter parsing and error handling.
+
+"use strict";
+x = 10; // ❌ Error (not declared)
+Without strict mode:
+x = 10; // ✅ Works (but creates global variable — bad practice)
+
+function show() {
+  console.log(this);
+}
+show(); // window (or global object)
+
+function show() {
+  console.log(this);
+}
+show(); // window (or global object)
+
+3. 🔐 Duplicate parameters
+function sum(a, a) {
+  return a;
+}
+"use strict";
+function sum(a, a) {} // ❌ Error
+
+🚀 Why use Strict Mode?
+✅ Benefits
+Catches bugs early
+Prevents unsafe actions
+Makes code easier to optimize by JS engines
+Improves security
+
+9.HOF next js
+
+// withAuth.js
+import React from "react";
+const withAuth = (WrappedComponent) => {
+  return function AuthComponent(props) {
+    const isLoggedIn = localStorage.getItem("token");
+
+    if (!isLoggedIn) {
+      return <h2>Please login first</h2>;
+    }
+
+    return <WrappedComponent {...props} />;
+  };
+};
+
+export default withAuth;
+10.shadow dom
+The Shadow DOM is a web standard designed to provide encapsulation for web components.
+It allows a developer to attach a hidden, separate Document Object Model (DOM) to an element,
+ensuring that the styles and structure inside that "shadow" don't leak out and affect the rest of the page—and vice versa.
+//give error message ex youtube if u use lib and custom css it'll overide
+
+Think of it like a "capsule" for your code.
+eg:video comp is the custom comp built by the chrome using shadow dom
+chrome doesnt show the shadow dom by default - we can enable in browser by clicking show user agent shadow dom
+
+
+1. Why do we need it?
+In standard HTML (the "Light DOM"), everything is global. If you write a CSS rule for button { color: red; },
+ every single button on your site turns red. This becomes a nightmare for large applications or third-party widgets
+(like a "Tweet" button) because:
+Global CSS conflicts: Your site’s styles might break the widget.
+ID collisions: Two elements might accidentally share the same ID.
+Complexity: It's hard to keep track of what styles affect which components.
