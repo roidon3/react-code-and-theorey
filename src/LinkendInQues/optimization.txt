@@ -1,0 +1,139 @@
+1. Handling Large Data Sets
+Q: How do you handle a huge amount of data in React (e.g., 10,000+ rows)?
+👉 What they expect:
+Use pagination
+Use virtualization
+You can mention libraries like:
+react-window
+react-virtualized
+💡 Key idea:
+Render only visible items instead of the full list
+
+2. Rendering 1000+ Customers Efficiently
+Q: How would you render 1000+ customers without slowing down the UI?
+👉 Good answer:
+Avoid rendering all at once
+Use:
+Pagination
+Infinite scrolling
+Virtual scrolling
+Memoize components using React.memo
+
+3. Improving Table Performance
+Q: How do you optimize a large table in React?
+👉 Expected points:
+Pagination (limit rows per page)
+Virtualization (only render visible rows)
+Memoization (useMemo, React.memo)
+Avoid unnecessary re-renders
+Bonus:
+Use libraries like:
+TanStack Table
+
+4. Pagination vs Infinite Scroll
+Q: Which is better: pagination or infinite scroll?
+👉 Smart answer:
+Pagination: better for control & SEO
+Infinite scroll: better UX (social media style)
+
+5. Avoiding Unnecessary Re-renders
+Q: How do you prevent unnecessary re-renders?
+👉 Expected:
+React.memo
+useCallback
+useMemo
+Proper state management
+
+6. useMemo vs useCallback
+Q: Difference between useMemo and useCallback?
+👉 Answer:
+useMemo → memoizes values
+useCallback → memoizes functions
+
+7. Key Prop Importance
+Q: Why is the key prop important in lists?
+👉 Answer:
+Helps React identify changed elements
+Prevents unnecessary DOM updates
+
+8. Code Splitting
+Q: How do you improve initial load time?
+👉 Answer:
+Lazy loading using React.lazy
+Dynamic imports
+
+9. Debouncing vs Throttling
+Q: When to use throttling vs debouncing?
+👉 Answer:
+Throttling → scroll, resize
+Debouncing → search input
+
+10. Handling API Performance
+Q: How do you optimize API calls?
+👉 Expected:
+Debounce search
+Cache responses
+Use libraries like:
+React Query
+
+11. State Management Optimization
+Q: How do you manage state efficiently in large apps?
+👉 Answer:
+Avoid prop drilling
+Use:
+Context API (carefully)
+Redux / Zustand (if needed)
+
+12. Image Optimization
+Q: How do you optimize images in React apps?
+👉 Answer:
+Lazy loading images
+Use modern formats (WebP)
+Responsive images
+
+13. Bundle Size Optimization
+Q: How do you reduce bundle size?
+👉 Answer:
+Tree shaking
+Remove unused libraries
+Code splitting
+
+14. Event Handling Optimization
+Q: How do you optimize heavy event listeners?
+👉 Answer:
+Throttling / debouncing
+Cleanup in useEffect
+
+15. React Profiler
+Q: How do you find performance issues?
+👉 Answer:
+Use React DevTools Profiler
+Identify unnecessary re-renders
+
+
+
+🔥 What is Virtualization / Windowing?
+👉 Definition:
+Instead of rendering the entire list (e.g., 10,000 items), React renders only the visible items on the screen.
+As you scroll:
+Old items are removed
+New items are added
+💡 It’s like a moving window over your data → that’s why it’s called windowing.
+
+🧠 Simple Analogy
+Imagine:
+You have 10,000 customers
+But screen shows only 10 at a time
+👉 Without virtualization:
+React renders all 10,000 ❌ (slow)
+👉 With virtualization:
+React renders only ~10–20 items ✅ (fast)
+
+🔹 Example Libraries
+Common libraries used:
+react-window
+react-virtualized
+
+virtualization (or windowing) is a performance optimization technique where only visible items are rendered instead 
+of the entire dataset. For example, in a list of 10,000 items, only the items in the viewport are rendered,
+ reducing DOM size and improving performance. Libraries like react-window help implement this efficiently.
