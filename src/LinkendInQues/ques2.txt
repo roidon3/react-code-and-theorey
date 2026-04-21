@@ -1,0 +1,110 @@
+1.Is js complied or Interpreted language
+JavaScript is both interpreted and compiled—not purely one or the other.
+Traditionally, JavaScript was considered an interpreted language because it was executed line-by-line in browsers.
+Modern JavaScript engines like V8 (used in Chrome and Node.js) actually compile JavaScript just-in-time (JIT) before running it.
+What really happens:
+Your JS code is first parsed.
+Then it's compiled into optimized machine code (JIT compilation).
+Then it’s executed.
+
+
+2.call by value vs call by reference
+🔹 Call by Value
+A copy of the actual value is passed to the function. Changes inside the function do NOT affect the original variable.
+
+function changeValue(x) {
+    x = x + 10;
+}
+let a = 5;
+changeValue(a);
+console.log(a); // 5 (no change)
+
+Why?
+x gets a copy of a
+Modifying x does not touch a
+👉 Think of it like giving someone a photocopy of a document.
+
+🔹 Call by Reference
+A reference (address) of the variable is passed. Changes inside the function DO affect the original variable.
+function changeValue(obj) {
+    obj.value = obj.value + 10;
+}
+let data = { value: 5 };
+changeValue(data);
+console.log(data.value); // 15 (changed)
+Why?
+obj refers to the same object in memory
+So modifying it changes the original
+👉 Think of it like giving someone a remote control to your TV — they can change it directly.
+
+Primitive types store actual values, while non-primitive types store references to values.
+
+🔥 Difference Between Primitive and Non-Primitive
+Feature     	Primitive Data Types 🟢     	                            Non-Primitive Data Types 🔵
+Definition	    Stores actual value	                                        Stores reference (address)
+Examples	    number, string, boolean, null, undefined, bigint, symbol	object, array, function
+Mutability	    ❌ Immutable (cannot change directly)	                   ✅ Mutable (can change)
+Storage	        Stored directly in memory	                                 Stored as reference to memory
+Copy behavior	Creates a new copy	                                         Copies the reference
+Comparison	    Compared by value	                                         Compared by reference
+Stored          Stack                                                        Heap
+
+3.🔐 How to Secure a React App
+
+❗ 1. Never store secrets in frontend
+API keys, tokens, DB credentials → ❌ NOT in React or .env
+Move them to backend (Node.js, etc.)
+👉 .env in React is only for configuration, not security
+
+🔹 2. Authentication & Authorization
+Use JWT / session-based auth
+Protect routes (private routes)
+Role-based access control
+
+🔹 3. Secure API Calls
+Use HTTPS (very important)
+Add authentication tokens in headers
+Validate requests on backend
+
+
+🔹 4. Protect Against CSRF
+Use CSRF tokens (mainly if using cookies)
+
+🔹 7. Secure Dependencies
+Keep packages updated
+Avoid vulnerable libraries
+
+🔹 8. Use Environment Variables
+Store only:
+API base URLs
+Non-sensitive configs
+
+React apps can’t truly secure sensitive data because code runs in the browser. So secrets should never
+be stored in the frontend, even in .env files. Instead, we handle sensitive logic on the backend,
+use authentication like JWT, secure APIs with HTTPS, and prevent attacks like XSS and CSRF.
+
+4.role based access
+Role-based access control means restricting access to features based on user roles like admin or user.
+The backend assigns roles and includes them in the JWT. On the frontend, we use that role to conditionally 
+render UI and protect routes. However, actual security is enforced on the backend by validating the user’s role
+before allowing access.
+
+5.
+
+
+
+9.garbage collection
+
+11.websoket polling
+12.react 19 features
+//jest testing
+
+//authination ,token
+
+//micro frontend module fixed
+
+//event emitter
+// What is the purpose of Symbol in JavaScript? How is it used?
+//Explain how memory is managed in JavaScript. What are garbage collection and memory leaks?
+//authitication
+//seo 
