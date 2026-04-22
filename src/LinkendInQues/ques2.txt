@@ -89,7 +89,7 @@ The backend assigns roles and includes them in the JWT. On the frontend, we use 
 render UI and protect routes. However, actual security is enforced on the backend by validating the user’s role
 before allowing access.
 
-5.
+5.How do you use AI in your project to increase the productivity
 
 
 

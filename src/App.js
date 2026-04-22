@@ -15,6 +15,7 @@ import StopWatch from './Components/CodingQ/StopWatch';
 import InfinteScroll from './Components/CodingQ/InfinteScroll';
 import Debounce from './Components/CodingQ/Debounce';
 import Throttle from './Components/CodingQ/Throttle';
+import TodoLocalStrg from './Components/CodingQ/TodoLocalStrg';
 function App() {
   return (
     <Routes>
@@ -35,6 +36,7 @@ function App() {
       <Route path='/infinite' element={<InfinteScroll />} />
       <Route path='/debounce' element={<Debounce />} />
       <Route path='/throttle' element={<Throttle />} />
+      <Route path='/todoLocal' element={<TodoLocalStrg />} />
     </Routes>
 
   );
