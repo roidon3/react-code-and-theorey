@@ -90,21 +90,285 @@ render UI and protect routes. However, actual security is enforced on the backen
 before allowing access.
 
 5.How do you use AI in your project to increase the productivity
+🔹 1. Code Generation
+Generate React components
+Create APIs, forms, validation
+👉 Saves time on repetitive work
+
+🔹 2. Debugging
+Paste error → get explanation + fix
+Faster than searching manually
+
+🔹 3. Learning New Concepts
+Quickly understand topics like:
+JWT auth
+Redux
+Hooks
+
+🔹 4. Refactoring Code
+Improve readability
+Optimize functions
+
+🔹 5. Writing Documentation
+Generate comments
+API docs
+
+6.React 19 features
+1. React Compiler (Automatic Optimization)
+React 19 introduces an experimental React Compiler that can automatically optimize your components.
+What it does:
+Eliminates the need for manual optimizations like useMemo and useCallback in many cases
+Improves rendering performance automatically
+Why it matters:
+You write simpler code, and React handles performance behind the scenes.
+
+2.simplifeid Ref's and metadata
+no more forwardREf nowm we can pass ref directly 
+Document metadata:you can now put <title><meta>and <link> anywhere in your component tree and react will automatically hoist them to
+<head> of the document
+
+3.server components and server actions-earlier these were used only in next js now even in recat there is server comp 
+server comp: render on the server to keep your bundle size small
+server action:allow client side forms to call functions that run directly on the server 
+
+4. Actions (Form Handling Made Easy)
+A big upgrade for handling forms and async logic.
+
+Before manually we had to manage usestate for loading,error and data.
+Now you can pass an async function directly to <form actiom={...}>prop.react handles pending state for you
+//Examples 
+
+5.the Use API
+this is a new way to read resources like promises and context directly inside your render function
+you can wrap a fetch promise in use(myPromise),and react will suspend (show a loading state) untill the data arrives
+unlike other hooks,use can be called inside loop and if statements 
+
+Before:
+import { useEffect, useState } from "react";
+function Users() {
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/users")
+      .then(res => res.json())
+      .then(setUsers);
+  }, []);
+
+  if (!users) return <p>Loading...</p>;
+
+  return <div>{users.length} users</div>;
+}
 
 
+After:
+import { use } from "react";
 
-9.garbage collection
+function Users() {
+  const users = use(fetch("/api/users").then(res => res.json()));
 
-11.websoket polling
-12.react 19 features
-//jest testing
+  return <div>{users.length} users</div>;
+}
 
-//authination ,token
+🧩 Important: You MUST use Suspense
+use() works with <Suspense>.
+import { Suspense, use } from "react";
+function Users() {
+  const users = use(fetchUsers());
 
-//micro frontend module fixed
+  return <div>{users.length} users</div>;
+}
+export default function App() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <Users />
+    </Suspense>
+  );
+}
 
-//event emitter
-// What is the purpose of Symbol in JavaScript? How is it used?
-//Explain how memory is managed in JavaScript. What are garbage collection and memory leaks?
-//authitication
-//seo 
+
+🧾 6. Improved Form Handling
+React 19 introduces built-in hooks for forms:
+useFormStatus
+Tracks pending/loading state of a form
+useFormState
+Manages form state and validation
+
+7. New Hooks & Enhancements
+Some additional useful improvements:
+useOptimistic → for optimistic UI updates
+useTransition improvements -used in forms
+Better error handling
+
+7.garbage collection
+Garbage collection in JavaScript is all about automatic memory management—you don’t manually allocate 
+or free memory like in C/C++.
+Finding memory that is no longer being used and freeing it automatically
+let user = { name: "Rahul" };
+user = null;
+👉 What happens?
+The object { name: "Rahul" } is no longer referenced
+GC will eventually remove it from memory
+🔍 How JavaScript Decides What to Remove
+JavaScript uses a concept called:
+🔗 Reachability
+👉 If something is reachable, it stays
+👉 If it’s not reachable, it gets deleted
+
+📌 What is “reachable”?
+Values are reachable if they can be accessed from:
+global variables
+current function variables
+objects referenced by other reachable objects
+
+⚙️ Main Algorithm: Mark and Sweep
+JavaScript engines (like V8) use this algorithm.
+
+🪄 Step 1: Mark
+Start from “roots” (global variables, stack)
+Mark everything reachable
+
+🧹 Step 2: Sweep
+Remove everything not marked
+
+
+8.expalin memory leak in js
+Garbage collection is automatic—but not perfect.
+❌ Common Causes of Memory Leaks
+1. Global variables
+globalVar = { data: "oops" }; // no let/const
+👉 Never cleaned → memory leak
+
+Fix-function test() {
+  let data = { value: 123 };
+}
+
+2. Closures holding memory
+function outer() {
+  let bigData = new Array(1000000);
+  return function inner() {
+    console.log("using something");
+  };
+}
+👉 bigData stays in memory because of closure
+Fix-function outer() {
+  let bigData = new Array(1000000);
+
+  function inner() {
+    console.log("hello");
+  }
+
+  bigData = null; // remove reference
+  return inner;
+}
+
+3. Forgotten timers
+setInterval(() => {
+  console.log("running...");
+}, 1000);
+👉 Keeps running → memory not freed
+fix-function test() {
+  let data = { value: 123 };
+}
+
+  let bigData = new Array(1000000);
+
+  function inner() {
+    console.log("hello");
+  }
+
+  bigData = null; // remove reference
+  return inner;
+
+aslo aslo remove event listenrs function outer() {}
+
+🔌 Unclosed Connections
+❌ Problem
+WebSockets
+API polling
+subscriptions
+Always clean up:
+socket.close();
+unsubscribe();
+
+🧠 Golden Rules to Avoid Leaks
+✅ 1. Always clean side effects
+timers
+listeners
+subscriptions
+✅ 2. Avoid unnecessary globals
+✅ 3. Break references when done
+obj = null;
+✅ 4. Be careful with closures
+✅ 5. Use cleanup in frameworks
+Especially in React (useEffect cleanup)
+
+9.memory leak in closure
+What will happen to memory in this code? Is there a memory leak?
+function createHandler() {
+  let largeData = new Array(1000000).fill("data");
+  return function () {
+    console.log("Button clicked");
+  };
+}
+const handler = createHandler();
+👉 Even though largeData is not used, it is still kept in memory
+Because of closure:
+Inner function keeps reference to outer scope
+Entire scope stays alive
+largeData cannot be garbage collected ❌
+Even if you don’t use largeData, it stays in memory because:
+“Closures themselves don’t cause memory leaks, but they can retain references to large unused variables
+, preventing garbage collection.”
+
+🛠️ How to Fix It
+✅ Option 1: Remove unnecessary reference
+function createHandler() {
+  let largeData = new Array(1000000).fill("data");
+
+  function handler() {
+    console.log("Button clicked");
+  }
+  largeData = null; // 🔥 break reference
+  return handler;
+}
+
+
+10.why to choose react over angular
+1. ⚡ Performance & Bundle Size
+Angular apps can become heavy
+React (especially modern versions like React 19) is lighter and faster
+👉 Faster load time = better UX
+
+2. 🧩 Flexibility
+Angular:
+Strict structure
+Harder to customize
+React:
+Pick your own:
+routing
+state management
+data fetching
+
+3. 📈 Easier to Scale Frontend Teams
+React:
+Component-based, simple mental model
+Easier onboarding
+Angular:
+Steeper learning curve (RxJS, decorators, DI, etc.)
+👉 Better for complex, evolving apps
+
+4. 🌐 Ecosystem & Community
+React has:
+larger ecosystem
+more libraries
+more developers available
+👉 Hiring becomes easier
+
+5. 🔥 Better for Modern Patterns
+React (especially newer versions):
+Server Components
+Suspense
+Streaming
+better SSR (via frameworks like Next.js)
+Angular is improving, but React is ahead in:
+👉 modern web architecture
