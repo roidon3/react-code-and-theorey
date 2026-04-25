@@ -16,6 +16,8 @@ import InfinteScroll from './Components/CodingQ/InfinteScroll';
 import Debounce from './Components/CodingQ/Debounce';
 import Throttle from './Components/CodingQ/Throttle';
 import TodoLocalStrg from './Components/CodingQ/TodoLocalStrg';
+import FilterVDApi from './Components/CodingQ/FilterVDApi';
+import Form from './Components/CodingQ/Form';
 function App() {
   return (
     <Routes>
@@ -37,6 +39,8 @@ function App() {
       <Route path='/debounce' element={<Debounce />} />
       <Route path='/throttle' element={<Throttle />} />
       <Route path='/todoLocal' element={<TodoLocalStrg />} />
+      <Route path='/filter' element={<FilterVDApi/>}/>
+      <Route path='/form' element={<Form/>}/>
     </Routes>
 
   );

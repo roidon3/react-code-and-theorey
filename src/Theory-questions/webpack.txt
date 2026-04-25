@@ -467,3 +467,18 @@ Loaders transform files
 Plugins optimize build
      ↓
 bundle.js created
+
+//answer for bundle size optimization is
+1.code Splitting-react.lazy
+2.tree shaking
+3.avoid heavy lib like loaash eg for debounce write manual code instaed of importing from loadash
+4. Optimize Assets
+Compress images
+Use modern formats (WebP)
+Lazy load images
+5. Remove Dead Code
+Delete unused components
+Avoid unused dependencies
+6. 🔍 Analyze Bundle
+Use tools to see what’s inside:
+Webpack Bundle Analyzer
