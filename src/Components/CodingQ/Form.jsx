@@ -127,3 +127,5 @@ function Form() {
 }
 
 export default Form;
+
+//make a dynamic form

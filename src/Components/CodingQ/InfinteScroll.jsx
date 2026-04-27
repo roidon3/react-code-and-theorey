@@ -25,9 +25,9 @@ function InfinteScroll() {
   }, [page]);
 
   function handleInfiniteScroll() {
-    const innerHeight = window.innerHeight;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTop = document.documentElement.scrollTop;
+    const innerHeight = window.innerHeight;//height of the viewable screen 
+    const scrollHeight = document.documentElement.scrollHeight;//total height of the screen
+    const scrollTop = document.documentElement.scrollTop;//how much we have scrolled
     try {
       if (innerHeight + scrollTop + 1 > scrollHeight) {
         setPage((prev) => prev + 1);

@@ -1,10 +1,7 @@
 //here make a search input feild and debounce it
 //depending on click of the saerch feild store data in the table
-//
 import React, { useEffect, useState } from "react";
-
 function FilterVDApi() {
-
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState([]);
   const[data,setData]=useState([])
@@ -12,12 +9,14 @@ function FilterVDApi() {
   console.log(searchData, "searchData");
   console.log(search, "search");
   console.log(debounce,"debounce");
+
   useEffect(()=>{
     const timer=setTimeout(()=>{
       setDebounce(search)
     },300)
     return ()=>clearTimeout(timer)
   },[search])
+  
   useEffect(() => {
     if(!debounce)return
     async function apiCall() {
