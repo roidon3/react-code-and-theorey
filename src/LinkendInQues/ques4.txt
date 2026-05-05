@@ -1,0 +1,47 @@
+1.Retry mechanism
+async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
+  try {
+    const res = await fetch(url, options);
+
+    if (!res.ok) {
+      throw new Error("API Error");
+    }
+
+    return await res.json();
+  } catch (err) {
+    if (retries > 0) {
+      console.log(`Retrying... (${retries} left)`);
+
+      await new Promise(resolve => setTimeout(resolve, delay));
+
+      return fetchWithRetry(url, options, retries - 1, delay);
+    } else {
+      throw err;
+    }
+  }
+}
+
+2.main diff between get and post call
+3.hydration in react
+
+
+
+//jest testing
+//micro frontend module fixed
+ Task scheduling & execution order
+//recent axio issue
+//recent react ssr issue
+6️⃣ What is Service Worker?
+1️⃣5️⃣ Difference between React 16 and React 18?
+1️⃣6️⃣ What is state scheduling?
+🔵 JavaScript & Coding:
+2️⃣0️⃣ Write code to find frequency of elements in an array?
+🟣 Practical / Scenario-Based:
+2️⃣1️⃣ Why migrate from Angular to React? What challenges did you face?
+Advantges of recat over other framework or libaarray 
+diff bw reat class and functional comp
+if lass comp is there why did react add functional component
+agentic ai
+13. What causes unnecessary re-renders in React?
+18. What is state batching? What changed in React 18?
+what is accessability and accesibility tags

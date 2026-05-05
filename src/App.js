@@ -18,6 +18,7 @@ import Throttle from './Components/CodingQ/Throttle';
 import TodoLocalStrg from './Components/CodingQ/TodoLocalStrg';
 import FilterVDApi from './Components/CodingQ/FilterVDApi';
 import Form from './Components/CodingQ/Form';
+import Progress from './Components/CodingQ/Progress';
 function App() {
   return (
     <Routes>
@@ -41,6 +42,7 @@ function App() {
       <Route path='/todoLocal' element={<TodoLocalStrg />} />
       <Route path='/filter' element={<FilterVDApi/>}/>
       <Route path='/form' element={<Form/>}/>
+        <Route path='/progress' element={<Progress/>}/>
     </Routes>
 
   );

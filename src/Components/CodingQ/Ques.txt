@@ -1,14 +1,8 @@
-🔹 Build a counter app (increment/decrement)
 🔹 Create a form with validation
-🔹 Fetch data from an API and display it
-🔹 Build a search input with debounce
-🔹 Implement a todo list (add/delete/mark complete)
 🔹 Create a reusable modal component
 🔹 Build a multi-select dropdown
 🔹 Implement pagination
 🔹 Create a custom hook (e.g. useFetch)
 🔹 Optimize a slow rendering component
-🔹 Implement infinite scrolling
-🔹 Manage global state
 🔹 Handle API errors globally
 🔹 Build dynamic forms (config-based)
