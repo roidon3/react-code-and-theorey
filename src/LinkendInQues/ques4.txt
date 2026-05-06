@@ -35,7 +35,6 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
 1️⃣5️⃣ Difference between React 16 and React 18?
 1️⃣6️⃣ What is state scheduling?
 🔵 JavaScript & Coding:
-2️⃣0️⃣ Write code to find frequency of elements in an array?
 🟣 Practical / Scenario-Based:
 2️⃣1️⃣ Why migrate from Angular to React? What challenges did you face?
 Advantges of recat over other framework or libaarray 
@@ -45,3 +44,6 @@ agentic ai
 13. What causes unnecessary re-renders in React?
 18. What is state batching? What changed in React 18?
 what is accessability and accesibility tags
+jwt
+challenging task you were worked on 
+logout in diffrent tab
