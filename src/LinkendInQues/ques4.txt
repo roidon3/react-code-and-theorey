@@ -21,29 +21,211 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
   }
 }
 
-2.main diff between get and post call
-3.hydration in react
+2. Interviewer: Your frontend is on localhost:3000 and backend is on localhost:8000.
+You open the browser console and see this:
+❌ Access to XMLHttpRequest blocked by CORS policy
+
+What is this error and how do you fix it?
+
+What’s actually going on:
+Your browser is the bodyguard. 🛡️
+It sees your frontend (port 3000) trying to talk to your backend (port 8000) and says “these are two different origins,
+ I’m not allowing this without permission.”
+That’s CORS. Cross-Origin Resource Sharing.
+
+The browser isn’t being dramatic. It’s protecting your users.
+3 ways to fix it:
+
+1️⃣ Proxy — quickest fix for development
+Add to vite.config.js:
+server: { proxy: { '/api': 'http://localhost:8000' }}
+Browser now thinks everything is one origin. CORS never triggers.
+
+2️⃣ Backend CORS middleware — the proper fix
+app.use(cors({ origin: 'http://localhost:3000' }))
+Your backend now gives written permission. Guard is happy. ✅
+
+3️⃣ Manual headers — when you need full control
+res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+
+The rules you must never break:
+✅ Development → use proxy
+✅ Production → whitelist specific origins only
+❌ Never use origin: '*' in production — you’re leaving the bank vault open
+❌ Never use a Chrome CORS extension as a “fix” — you’re just blindfolding the guard 
+
+One line to remember forever:
+CORS is the browser asking for permission. Your backend grants it. Your proxy fakes it.
+
+
+3.Hydration in React?
+In React, hydration is the process where React takes the HTML already rendered on the page (usually from the server) 
+and attaches JavaScript functionality to it so the page becomes interactive.
+
+This is mainly used in frameworks like Next.js
+
+Why Hydration is Needed
+
+Normally in a React app:
+Browser downloads JavaScript
+React renders UI in browser
+User sees content
+This is called Client Side Rendering (CSR).
+
+Problem:
+Initial page load can be slow
+User may see blank screen until JS loads
+
+So frameworks use Server Side Rendering (SSR):
+Server generates HTML first
+Browser immediately shows content
+React then "hydrates" the HTML by attaching event handlers
+
+4.How do you do caching in react
+Caching in React means storing previously fetched or computed data so we can reuse it instead of recalculating or refetching again.
+
+This improves:
+performance
+speed
+user experience
+reduces API calls
+
+Types of Caching in React
+Type	                                        Purpose
+API response caching	                        Avoid repeated API calls
+Component caching	                            Prevent unnecessary renders
+Browser caching                             	Store files/assets
+Memoization	Cache                             computed values/functions
+State persistence	                            Store data locally
+
+
+5. If localstorage exists what the point of redux or context api?
+Main diff is
+Localstorage                      Redux/context API
+Persistent storage                State management
+Stores data in browser            Shares data across components
+Survives page refresh             Reset on refresh
+
+localStorage does NOT rerender UI automatically.
+
+localStorage is used for persistent browser storage, whereas Redux or Context API is used for reactive state management in React
+applications. localStorage alone cannot trigger component rerenders or efficiently share live state across components. In real
+applications, we often use both together — Redux/Context for managing UI state and localStorage for persistence across refreshes.
+
+6. How will you optimize API calls?
+Debouncing 
+Throttling
+Caching the api response
+
+7. What causes unnecessary re-renders in React?
+A React component rerenders whenever:
+its state changes
+its props change
+its parent rerenders
+context value changes
+
+Unnecessary rerenders happen when components rerender even though the UI/data hasn’t actually changed.
+This affects:
+performance
+API calls
+large applications
+Common Causes of Unnecessary Rerenders
+1. Parent Component Rerender - When parent rerenders, child rerenders too.
+2. Function Props Recreated Every Render - use useCallback
+3. State Updates with Same Value
+
+8. What is React and why is it efficient?
+1.Virtual DOM -React uses a Virtual DOM, which is a lightweight copy of the real DOM.
+When state or props change:
+React first updates the Virtual DOM
+It compares the new Virtual DOM with the previous one (diffing)
+Then it updates only the changed parts in the real DOM
+This reduces expensive DOM manipulations and improves performance.
+Example: Instead of re-rendering the whole page, React updates only the specific button, text, or component that changed.
+2. Component-Based Architecture - React applications are split into reusable components.
+Because of this:
+Only affected components re-render
+Code becomes reusable and maintainable
+UI updates become more isolated and optimized
+3. Reconciliation Algorithm
+React uses an efficient diffing algorithm called Reconciliation.
+It intelligently determines:
+What changed
+What needs updating
+What can stay untouched
+This minimizes unnecessary DOM operations.
+4. One-Way Data Flow
+React follows one-way data binding.
+This makes:
+State changes predictable
+Debugging easier
+Rendering more controlled and optimized
+5. Performance Optimization Features
+React provides built-in optimization tools like:
+React.memo
+useMemo
+useCallback
+Lazy loading (React.lazy)
+Code splitting
+These help avoid unnecessary re-renders and reduce bundle size.
+
+9.Advantges of React over other framework or library 
+say above answer +
+. Huge Ecosystem and Community - Many third-party libraries
+5. Easy Learning Curve
+Compared to frameworks like Angular, React is easier to start with because it mainly focuses on the UI layer.
+Developers can gradually learn advanced concepts.
+6. Flexibility - React is a library, not a full-fledged framework.
+7. Strong Performance Optimization Features - usememo,usecallback,react.memolazy loading,code spliting
+8. SEO Support with Next.js
+9. Cross-Platform Development - With React Native, developers can build mobile applications using React concepts.
+This allows sharing knowledge between web and mobile development.
+
+10.diff bw React class and functional comp
+if class comp is there why did react added functional component
+
+
+Feature                       	Class Component                               	Functional Component
+Syntax	                        ES6 class                                     	Simple JavaScript function
+State Handling	                Uses this.state	                                Uses useState hook
+Lifecycle Methods	              componentDidMount, componentDidUpdate etc.    	Uses useEffect
+this Keyword                   	Required                                       	Not required
+Code Size                      	More boilerplate	                              Cleaner and shorter
+Performance                   	Slightly heavier	                              Generally lighter
+Hooks Support	                  Cannot use hooks                              	Supports hooks
+Readability	                    More complex                                  	Easier to understand
+Reusability                    	Harder logic sharing                           	Easier with custom hooks
+
+
+Why Functional Components Became Preferred
+1. Less Boilerplate
+No need for:
+class
+constructor
+this
+binding methods
+Code becomes cleaner.
+2. Easier to Understand
+Functional components are simpler and more readable.
+3. Better Logic Reusability
+Custom hooks allow sharing logic between components easily.
+Earlier in class components, developers used:
+HOCs (Higher Order Components)
+Render props
+which were harder to maintain.
+4. Avoid this Confusion
+Class components often caused issues with:
+this binding
+callback context
+Functional components avoid this completely.
+5. Better Optimization and Modern React Features
+Most new React features are designed mainly for functional components and hooks.
 
 
 
-//jest testing
-//micro frontend module fixed
- Task scheduling & execution order
-//recent axio issue
-//recent react ssr issue
-6️⃣ What is Service Worker?
-1️⃣5️⃣ Difference between React 16 and React 18?
-1️⃣6️⃣ What is state scheduling?
-🔵 JavaScript & Coding:
-🟣 Practical / Scenario-Based:
-2️⃣1️⃣ Why migrate from Angular to React? What challenges did you face?
-Advantges of recat over other framework or libaarray 
-diff bw reat class and functional comp
-if lass comp is there why did react add functional component
-agentic ai
-13. What causes unnecessary re-renders in React?
-18. What is state batching? What changed in React 18?
-what is accessability and accesibility tags
-jwt
-challenging task you were worked on 
-logout in diffrent tab
+
+
+
+
+

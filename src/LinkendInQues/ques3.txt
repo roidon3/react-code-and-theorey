@@ -29,6 +29,7 @@ Instead of one big blocking task, split it using:
 - requestIdleCallback
 This allows the browser to update the UI between tasks.
 🔹5. Debouncing / Throttling
+🔹6. Move Work to Backend
 
 3.🔹 What “event emitter” means (in general)
 An event emitter is an object that:
