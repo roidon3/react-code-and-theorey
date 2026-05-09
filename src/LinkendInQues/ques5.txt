@@ -1,0 +1,141 @@
+🔹1.Difference between React 16 and React 18?
+Tell React19 features
+
+🔹2. What is state batching? What changed in React 18?
+React groups multiple state updates together and performs a single re-render instead of multiple re-renders.
+React 18 Change → Automatic Batching Everywhere
+React 18 introduced automatic batching for:
+timeouts , promises, async/await , native event handlers , API calls
+
+State batching is React’s process of grouping multiple state updates into a single re-render to improve performance.
+Before React 18, batching worked mainly inside React event handlers. React 18 introduced automatic batching everywhere,
+including inside promises, setTimeout, async functions, and API calls.
+
+🔹3. How does React work internally?
+React works internally in these major steps:
+
+Create Virtual DOM
+Detect changes using Diffing
+Reconciliation process
+Update Real DOM efficiently
+Fiber architecture manages rendering
+1-4 expalin in your own words
+5. Fiber Architecture (React 16+)
+React 16 introduced Fiber Architecture.
+Fiber improves rendering by allowing React to:
+Pause work
+Resume work
+Prioritize important updates
+Split rendering into chunks
+This helps large applications stay responsive.
+
+🔹4.API is getting called twice — how will you debug it?
+First, I would identify where the API call is happening:useEffect,button click,component render,Redux thunk/saga,parent-child re-render
+Then I would inspect possible causes step by step.
+
+🔹5. How do you handle role-based UI permissions?
+Storing user role/permissions after login
+Managing them globally using Context API or Redux
+Conditionally rendering UI based on permissions
+Protecting routes
+Validating permissions again in backend APIs
+
+I handle role-based UI permissions by storing user roles or permissions after authentication and conditionally rendering
+components or routes based on those permissions. I usually manage permissions globally using Context API or Redux and create 
+reusable helper functions or hooks for scalability. However, frontend restrictions are only for UI control — actual authorization
+must always be validated on the backend.
+
+🔹6. Why do we use TypeScript?
+TypeScript is used to make JavaScript applications:
+More reliable
+Easier to maintain
+Less error-prone
+Better for large-scale applications
+Main Reasons We Use TypeScript
+1. Static Type Checking
+let age: number = 25;
+age = "hello"; // Error
+
+2. Better Code Quality
+
+We use TypeScript because it adds static typing to JavaScript, helping catch errors during development instead of runtime.
+It improves code quality, maintainability, scalability, and developer productivity through features like type checking, 
+interfaces, autocomplete, and safer refactoring. It is especially useful for large-scale applications and team collaboration.
+
+🔹7.How does "extends" work in TypeScript and what is the difference between type and interface?
+extends is used for:
+inheritance
+reusability
+creating relationships between types/interfaces
+It allows one interface or class to inherit properties from another.
+
+Difference Between type and interface
+Similiarity - Both are used to define object shapes/types.
+interface User {
+  name: string;
+}
+type User = {
+  name: string;
+};
+Both works similiar in most of the cases
+
+🔹8. How would you optimize a slow React application?
+First, I would identify the performance bottleneck using:
+React DevTools Profiler
+Network tab
+Lighthouse
+console profiling
+
+Then I would optimize based on the root cause.
+re-renders - usememo,memo,usecallback
+memoization
+API optimization
+bundle optimization
+rendering performance
+
+I would first identify the bottleneck using React DevTools Profiler, Lighthouse, and browser Network tools.
+Then I would optimize unnecessary re-renders using React.memo, useMemo, and useCallback, reduce API calls 
+with debouncing and caching, implement lazy loading and code splitting, virtualize large lists, optimize state management,
+and reduce bundle size for better overall performance.
+
+🔹11.challanging task you were worked on ?-explin web socket,polling,azure manipulations
+
+🔹12.How to logout the application if its opened in multiple tabs
+There are multiple ways to synchronize logout across tabs.
+Most common approaches:
+localStorage + storage event
+BroadcastChannel API (modern and cleaner)
+
+1. Using localStorage + storage Event
+When logout happens in one tab:
+remove token
+update localStorage
+other tabs listen for changes
+
+2.Using BroadcastChannel API (Modern Approach)
+const channel = new BroadcastChannel("auth");
+Send Logout Message
+function logout() {
+  localStorage.removeItem("token");
+  channel.postMessage("logout");
+  window.location.href = "/login";
+}
+Listen in Other Tabs
+useEffect(() => {
+  channel.onmessage = (event) => {
+    if (event.data === "logout") {
+      window.location.href = "/login";
+    }
+  };
+  return () => {
+    channel.close();
+  };
+}, []);
+
+🔹13.Redux vs Context vs Zustand, how do you decide in a large-scale application?
+Problem with Context in Large Apps
+When context value changes:
+all consuming components may re-render
+This can create performance issues.
+So Context is not ideal for:
+frequently changing large state

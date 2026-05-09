@@ -1,4 +1,4 @@
-1.Retry mechanism
+🔹1.Retry mechanism
 async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
   try {
     const res = await fetch(url, options);
@@ -21,7 +21,7 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
   }
 }
 
-2. Interviewer: Your frontend is on localhost:3000 and backend is on localhost:8000.
+🔹2. Interviewer: Your frontend is on localhost:3000 and backend is on localhost:8000.
 You open the browser console and see this:
 ❌ Access to XMLHttpRequest blocked by CORS policy
 
@@ -59,7 +59,7 @@ One line to remember forever:
 CORS is the browser asking for permission. Your backend grants it. Your proxy fakes it.
 
 
-3.Hydration in React?
+🔹3.Hydration in React?
 In React, hydration is the process where React takes the HTML already rendered on the page (usually from the server) 
 and attaches JavaScript functionality to it so the page becomes interactive.
 
@@ -82,7 +82,7 @@ Server generates HTML first
 Browser immediately shows content
 React then "hydrates" the HTML by attaching event handlers
 
-4.How do you do caching in react
+🔹4.How do you do caching in react
 Caching in React means storing previously fetched or computed data so we can reuse it instead of recalculating or refetching again.
 
 This improves:
@@ -100,7 +100,7 @@ Memoization	Cache                             computed values/functions
 State persistence	                            Store data locally
 
 
-5. If localstorage exists what the point of redux or context api?
+🔹5. If localstorage exists what the point of redux or context api?
 Main diff is
 Localstorage                      Redux/context API
 Persistent storage                State management
@@ -113,12 +113,12 @@ localStorage is used for persistent browser storage, whereas Redux or Context AP
 applications. localStorage alone cannot trigger component rerenders or efficiently share live state across components. In real
 applications, we often use both together — Redux/Context for managing UI state and localStorage for persistence across refreshes.
 
-6. How will you optimize API calls?
+🔹6. How will you optimize API calls?
 Debouncing 
 Throttling
 Caching the api response
 
-7. What causes unnecessary re-renders in React?
+🔹7. What causes unnecessary re-renders in React?
 A React component rerenders whenever:
 its state changes
 its props change
@@ -135,7 +135,7 @@ Common Causes of Unnecessary Rerenders
 2. Function Props Recreated Every Render - use useCallback
 3. State Updates with Same Value
 
-8. What is React and why is it efficient?
+🔹8. What is React and why is it efficient?
 1.Virtual DOM -React uses a Virtual DOM, which is a lightweight copy of the real DOM.
 When state or props change:
 React first updates the Virtual DOM
@@ -170,7 +170,7 @@ Lazy loading (React.lazy)
 Code splitting
 These help avoid unnecessary re-renders and reduce bundle size.
 
-9.Advantges of React over other framework or library 
+🔹9.Advantges of React over other framework or library 
 say above answer +
 . Huge Ecosystem and Community - Many third-party libraries
 5. Easy Learning Curve
@@ -182,7 +182,7 @@ Developers can gradually learn advanced concepts.
 9. Cross-Platform Development - With React Native, developers can build mobile applications using React concepts.
 This allows sharing knowledge between web and mobile development.
 
-10.diff bw React class and functional comp
+🔹10.diff bw React class and functional comp
 if class comp is there why did react added functional component
 
 
@@ -221,11 +221,3 @@ callback context
 Functional components avoid this completely.
 5. Better Optimization and Modern React Features
 Most new React features are designed mainly for functional components and hooks.
-
-
-
-
-
-
-
-

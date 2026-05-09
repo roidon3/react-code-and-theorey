@@ -1,0 +1,16 @@
+//jest testing
+//micro frontend module fixed
+ Task scheduling & execution order
+//recent axio issue
+//recent react ssr issue
+6️⃣ What is Service Worker?
+1️⃣6️⃣ What is state scheduling?
+🔵 JavaScript & Coding:
+🟣 Practical / Scenario-Based:
+2️⃣1️⃣ Why migrate from Angular to React? What challenges did you face?
+agentic ai
+what is accessability and accesibility tags
+jwt
+//how do you handle 1lakhs users
+ 5. Shadowing & illegal shadowing
+  4. Race conditions & stale closures
