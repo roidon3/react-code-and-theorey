@@ -33,3 +33,34 @@ function UseCallback() {
 }
 
 export default UseCallback;
+
+
+// import React, { useState, useCallback } from "react";
+
+// function Child({ onClick }) {
+//   console.log("Child Rendered");
+
+//   return <button onClick={onClick}>Click</button>;
+// }
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   const handleClick = useCallback(() => {
+//     console.log("Button clicked");
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>{count}</h1>
+
+//       <button onClick={() => setCount(count + 1)}>
+//         Increment
+//       </button>
+
+//       <Child onClick={handleClick} />
+//     </div>
+//   );
+// }
+
+// export default App;
