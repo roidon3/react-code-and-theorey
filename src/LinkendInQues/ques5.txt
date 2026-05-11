@@ -139,3 +139,41 @@ all consuming components may re-render
 This can create performance issues.
 So Context is not ideal for:
 frequently changing large state
+
+🔹14.What is the difference between git merge and git rebase?
+At a high level, both merge and rebase in Git are ways to integrate changes from one branch into 
+another—but they do it very differently, especially in how they handle commit history.
+
+git merge is used to combine changes from one branch into another branch.
+Suppose you have:
+main branch → production code
+feature/login branch → login feature work
+After completing the feature, you want to bring those changes into main.
+Basic Flow
+1. Create and switch to feature branch
+git checkout -b feature/login
+Make some changes and commit them.
+git add .
+git commit -m "Added login feature"
+2. Switch back to main
+git checkout main
+3. Merge feature branch into main
+git merge feature/login
+Now Git combines the commits from feature/login into main.
+
+git rebase is used to move or replay commits from one branch onto another branch.
+Imagine:
+main branch has new commits
+Your feature branch is behind
+You want your feature commits to appear as if they were created on top of the latest main
+
+Important Difference: Merge vs Rebase
+Merge	                      Rebase
+Keeps branch history	      Rewrites history
+Creates merge commit	      No merge commit
+History can become messy  	Clean linear history
+Safe for shared branches	  Risky on shared branches
+
+Merge:
+Keeps the full history intact (no rewriting).
+Creates a merge commit (M).
