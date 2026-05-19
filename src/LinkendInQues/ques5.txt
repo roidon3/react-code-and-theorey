@@ -177,3 +177,30 @@ Safe for shared branches	  Risky on shared branches
 Merge:
 Keeps the full history intact (no rewriting).
 Creates a merge commit (M).
+
+15.which is better promise.all or async/await?
+async/await by itself often causes sequential execution
+Sequential execution increases total latency
+Promise.all reduces latency by running promises concurrently
+await api1(); // 2s
+await api2(); // 2s
+await api3(); // 2s
+Total latency = 6 seconds
+
+But with:
+await Promise.all([
+   api1(),
+   api2(),
+   api3()
+]);
+All requests start together.
+
+Total latency = 2 seconds
+Promise.all is better when async operations are independent because it reduces latency by executing them concurrently,
+ whereas multiple await statements execute sequentially and increase total response time.
+ async/await is syntax sugar over promises and is mainly for readability.
+if api response depends on prevoius res use async'/await else async/await
+
+ We use Promise.all for independent async operations to reduce latency through parallel execution.
+We use async/await when operations are dependent and need sequential execution.
+In real-world applications, both are commonly used together.
