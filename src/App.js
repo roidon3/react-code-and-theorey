@@ -19,6 +19,7 @@ import TodoLocalStrg from './Components/CodingQ/TodoLocalStrg';
 import FilterVDApi from './Components/CodingQ/FilterVDApi';
 import Form from './Components/CodingQ/Form';
 import Progress from './Components/CodingQ/Progress';
+import TicTacToe from './Components/Coding2.0/TicTacToe';
 function App() {
   return (
     <Routes>
@@ -40,9 +41,10 @@ function App() {
       <Route path='/debounce' element={<Debounce />} />
       <Route path='/throttle' element={<Throttle />} />
       <Route path='/todoLocal' element={<TodoLocalStrg />} />
-      <Route path='/filter' element={<FilterVDApi/>}/>
-      <Route path='/form' element={<Form/>}/>
-        <Route path='/progress' element={<Progress/>}/>
+      <Route path='/filter' element={<FilterVDApi />} />
+      <Route path='/form' element={<Form />} />
+      <Route path='/progress' element={<Progress />} />
+      <Route path='/ticTacToe' element={<TicTacToe />} />
     </Routes>
 
   );
